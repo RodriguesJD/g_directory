@@ -5,7 +5,11 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
 
-def dir_service():
+def dir_service() -> object:
+    """
+    This function handles auth and service for google's access to admin sdk directory api.
+    :return service: Rest API service object
+    """
     # If modifying these scopes, delete the file token.pickle.
     SCOPES = ['https://www.googleapis.com/auth/admin.directory.user']
 
