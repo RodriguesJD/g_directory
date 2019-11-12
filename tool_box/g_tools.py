@@ -32,20 +32,4 @@ def main():
 
     service = build('admin', 'directory_v1', credentials=creds)
 
-    # Call the Admin SDK Directory API
-    print('Getting the first 10 users in the domain')
-    results = service.users().list(customer='my_customer', maxResults=10,
-                                orderBy='email').execute()
-    users = results.get('users', [])
-
-    if not users:
-        print('No users in the domain.')
-    else:
-        print('Users:')
-        for user in users:
-            print(u'{0} ({1})'.format(user['primaryEmail'],
-                user['name']['fullName']))
-
-
-if __name__ == '__main__':
-    main()
+    return service
