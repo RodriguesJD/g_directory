@@ -4,13 +4,11 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
-# If modifying these scopes, delete the file token.pickle.
-SCOPES = ['https://www.googleapis.com/auth/admin.directory.user']
 
-def main():
-    """Shows basic usage of the Admin SDK Directory API.
-    Prints the emails and names of the first 10 users in the domain.
-    """
+def dir_service():
+    # If modifying these scopes, delete the file token.pickle.
+    SCOPES = ['https://www.googleapis.com/auth/admin.directory.user']
+
     creds = None
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
