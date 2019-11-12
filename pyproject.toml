@@ -1,4 +1,4 @@
-[tool.poetry]
+""[tool.poetry]
 name = "g_directory"
 version = "0.1.0"
 description = ""
