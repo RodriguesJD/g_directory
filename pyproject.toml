@@ -1,4 +1,4 @@
-""[tool.poetry]
+[tool.poetry]
 name = "g_directory"
 version = "0.1.0"
 description = ""
@@ -6,6 +6,9 @@ authors = ["Jeremy Rodrigues <jeremy.rodrigues@therealreal.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
+google-api-python-client = "^1.7"
+google-auth-httplib2 = "^0.0.3"
+google-auth-oauthlib = "^0.4.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^3.0"
