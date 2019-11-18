@@ -19,3 +19,12 @@ def test_get_all_users():
 def test_find_user():
     user = g_tools.find_user(my_work_email)
     assert isinstance(user, dict)
+
+
+def test_get_all_groups():
+    all_groups = g_tools.get_all_groups()
+    assert isinstance(all_groups, list)
+    for group in all_groups:
+        assert isinstance(group, dict)
+        # TODO test the content of the dict
+
