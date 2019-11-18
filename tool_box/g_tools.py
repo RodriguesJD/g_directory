@@ -60,10 +60,23 @@ def get_all_users() -> list:
         for user in users:
             all_user_data.append(user)
         keys_list = list(next_page_results.keys())
-        #
         if 'nextPageToken' in keys_list:
             next_page_token = next_page_results['nextPageToken']
         else:
             next_page_token = False
 
     return all_user_data
+
+
+def find_user(user_email: str) -> dict:
+    """
+    Search for user by email.
+
+    :param user_email: Users email address.
+    :return user_data: Users data in a dictionary.
+    """
+    user_data = dir_service().users().get(userKey=user_email).execute()
+
+    return user_data
+
+
