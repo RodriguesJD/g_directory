@@ -2,6 +2,8 @@ import os
 from tool_box import g_tools
 
 my_work_email = os.environ["WORK_EMAIL"]
+group_email = os.environ["WORK_GROUP_EMAIL"]
+
 
 
 def test_dir_service():
@@ -28,3 +30,7 @@ def test_get_all_groups():
         assert isinstance(group, dict)
         # TODO test the content of the dict
 
+
+def test_find_group():
+    group = g_tools.find_group(group_email)
+    assert isinstance(group, dict)

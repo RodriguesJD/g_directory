@@ -107,3 +107,15 @@ def get_all_groups() -> list:
             next_page_token = False
 
     return all_group_data
+
+
+def find_group(group_email: str) -> dict:
+    """
+    Search for user by email.
+
+    :param group_email: Users email address.
+    :return user_data: Users data in a dictionary.
+    """
+    group_data = dir_service().groups().get(groupKey=group_email).execute()
+
+    return group_data
