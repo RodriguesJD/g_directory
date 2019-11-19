@@ -34,3 +34,11 @@ def test_get_all_groups():
 def test_find_group():
     group = g_tools.find_group(group_email)
     assert isinstance(group, dict)
+
+
+def test_get_all_orgunits():
+    all_org_units = g_tools.get_all_orgunits()
+    assert isinstance(all_org_units, list)
+    for org_unit in all_org_units:
+        assert isinstance(org_unit, dict)
+        # TODO test the content of the dict

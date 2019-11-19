@@ -14,7 +14,8 @@ def dir_service() -> object:
     """
     # If modifying these scopes, delete the file token.pickle.
     SCOPES = ['https://www.googleapis.com/auth/admin.directory.user',
-              'https://www.googleapis.com/auth/admin.directory.group']
+              'https://www.googleapis.com/auth/admin.directory.group',
+              'https://www.googleapis.com/auth/admin.directory.orgunit']
 
     creds = None
     # The file token.pickle stores the user's access and refresh tokens, and is
@@ -119,3 +120,62 @@ def find_group(group_email: str) -> dict:
     group_data = dir_service().groups().get(groupKey=group_email).execute()
 
     return group_data
+
+
+def get_all_groups() -> list:
+    """
+    Get all data on all groups and return it as a list of dictionaries.
+
+    :return all_group_data: List of dictionaries of all group data.
+    """
+    all_group_data = []
+    results = dir_service().groups().list(customer='my_customer').execute()
+    next_page_token = results['nextPageToken']
+    groups = results['groups']
+    for group in groups:
+        all_group_data.append(group)
+
+    while next_page_token:
+        next_page_results = dir_service().groups().list(customer='my_customer',
+                                                        pageToken=next_page_token).execute()
+        groups = next_page_results['groups']
+        for group in groups:
+            all_group_data.append(group)
+        keys_list = list(next_page_results.keys())
+        if 'nextPageToken' in keys_list:
+            next_page_token = next_page_results['nextPageToken']
+        else:
+            next_page_token = False
+
+    return all_group_data
+
+
+def get_all_orgunits() -> list:
+    """
+    Get all data on all org_units and return it as a list of dictionaries.
+
+    :return all_orgunits_data: List of dictionaries of all org_unit data.
+    """
+    all_orgunits_data = []
+    results = dir_service().orgunits().list(customerId='my_customer').execute()
+    org_units = results['organizationUnits']
+    for org_unit in org_units:
+        all_orgunits_data.append(org_unit)
+
+    keys_list = list(results.keys())
+    if 'nextPageToken' in keys_list:
+        next_page_token = results['nextPageToken']
+        while next_page_token:
+            next_page_results = dir_service().orgunits().list(customerId='my_customer',
+                                                              pageToken=next_page_token).execute()
+            org_units = next_page_results['organizationUnits']
+            for org_unit in org_units:
+                all_orgunits_data.append(org_unit)
+
+            keys_list = list(next_page_results.keys())
+            if 'nextPageToken' in keys_list:
+                next_page_token = next_page_results['nextPageToken']
+            else:
+                next_page_token = False
+
+    return all_orgunits_data
