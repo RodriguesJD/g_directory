@@ -112,10 +112,10 @@ def get_all_groups() -> list:
 
 def find_group(group_email: str) -> dict:
     """
-    Search for user by email.
+    Search for group by email.
 
-    :param group_email: Users email address.
-    :return user_data: Users data in a dictionary.
+    :param group_email: Group email address.
+    :return user_data: Group data in a dictionary.
     """
     group_data = dir_service().groups().get(groupKey=group_email).execute()
 
