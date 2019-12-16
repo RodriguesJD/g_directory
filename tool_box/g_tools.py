@@ -70,14 +70,16 @@ def get_all_users() -> list:
     return all_user_data
 
 
-def find_user(user_email: str) -> dict:
+def find_user(primary_user_email: str) -> dict:
     """
-    Search for user by email.
+    Search for user by primary email.
 
-    :param user_email: Users email address.
+    :param primary_user_email: Users primary email address.
     :return user_data: Users data in a dictionary.
     """
-    user_data = dir_service().users().get(userKey=user_email).execute()
+    user_data = dir_service().users().get(userKey=primary_user_email).execute()
+    if primary_user_email != user_data['primaryEmail']:
+        user_data = False
 
     return user_data
 
