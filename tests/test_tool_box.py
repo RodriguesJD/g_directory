@@ -5,7 +5,6 @@ my_work_email = os.environ["WORK_EMAIL"]
 group_email = os.environ["WORK_GROUP_EMAIL"]
 
 
-
 def test_dir_service():
     assert str(type(g_tools.dir_service())) == "<class 'googleapiclient.discovery.Resource'>"
 
