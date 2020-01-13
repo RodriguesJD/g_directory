@@ -4,3 +4,4 @@ venv
 credentials.json
 *__pycache__*
 token.pickle
+g_dir_script.py
