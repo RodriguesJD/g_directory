@@ -48,7 +48,7 @@ def get_all_users() -> list:
     :return all_user_data: List of dictionaries of all users data.
     """
     all_user_data = []
-    results = dir_service().users().list(customer='my_customer', orderBy='email').execute()
+    results = dir_service().users().list(customer='my_customer', orderBy='email', projection="full").execute()
     next_page_token = results['nextPageToken']
     users = results['users']
     for user in users:
@@ -56,6 +56,7 @@ def get_all_users() -> list:
 
     while next_page_token:
         next_page_results = dir_service().users().list(customer='my_customer',
+                                                       projection="full",
                                                        pageToken=next_page_token,
                                                        orderBy='email').execute()
         users = next_page_results['users']
@@ -77,7 +78,7 @@ def find_user(primary_user_email: str) -> dict:
     :param primary_user_email: Users primary email address.
     :return user_data: Users data in a dictionary.
     """
-    user_data = dir_service().users().get(userKey=primary_user_email).execute()
+    user_data = dir_service().users().get(userKey=primary_user_email, projection="full").execute()
     if primary_user_email != user_data['primaryEmail']:
         user_data = False
 
