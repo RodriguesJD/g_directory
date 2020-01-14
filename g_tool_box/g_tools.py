@@ -85,6 +85,11 @@ def find_user(primary_user_email: str) -> dict:
     return user_data
 
 
+def update_user(primary_user_email: str, user_dict: dict):
+    google_response = dir_service().users().update(userKey=primary_user_email, body=user_dict).execute()
+    return google_response
+
+
 def get_all_groups() -> list:
     """
     Get all data on all groups and return it as a list of dictionaries.
