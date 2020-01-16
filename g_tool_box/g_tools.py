@@ -60,6 +60,7 @@ def get_all_users() -> list:
                                                        pageToken=next_page_token,
                                                        orderBy='email').execute()
         users = next_page_results['users']
+
         for user in users:
             all_user_data.append(user)
         keys_list = list(next_page_results.keys())
@@ -79,7 +80,7 @@ def find_user(primary_user_email: str) -> dict:
     :return user_data: Users data in a dictionary.
     """
     user_data = dir_service().users().get(userKey=primary_user_email, projection="full").execute()
-    if primary_user_email != user_data['primaryEmail']:
+    if primary_user_email.lower() != user_data['primaryEmail'].lower():
         user_data = False
 
     return user_data
