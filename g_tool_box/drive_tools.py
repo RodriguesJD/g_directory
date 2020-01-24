@@ -27,13 +27,23 @@ def upload_csv_to_drive(csv_path, csv_name, folder_id=None):
         csv_metadata = {'name': csv_name}
 
     media = MediaFileUpload(csv_path,
-                            mimetype='text/csv',
-                            resumable=True)
+                            mimetype='text/csv')
     file = drive_service().files().create(body=csv_metadata,
                                           media_body=media,
                                           fields='id').execute()
 
     return file.get('id')
 
+
+def create_folder_in_drive(folder_id, folder_name):
+    file_metadata = {
+        'name': folder_name,
+        'mimeType': 'application/vnd.google-apps.folder',
+        'parents': [folder_id]
+    }
+    folder = drive_service().files().create(body=file_metadata,
+                                        fields='id').execute()
+
+    return folder.get('id')
 
 
