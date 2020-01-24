@@ -23,7 +23,10 @@ def google_creds():
     SCOPES = ['https://www.googleapis.com/auth/admin.directory.user',
               'https://www.googleapis.com/auth/admin.directory.group',
               'https://www.googleapis.com/auth/admin.directory.orgunit',
-              'https://www.googleapis.com/auth/drive.metadata.readonly']
+              'https://www.googleapis.com/auth/drive.file',
+              'https://www.googleapis.com/auth/drive',
+              'https://www.googleapis.com/auth/drive.activity'
+              ]
 
     creds = None
     # The file token.pickle stores the user's access and refresh tokens, and is

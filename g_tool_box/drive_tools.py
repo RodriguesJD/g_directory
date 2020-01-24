@@ -1,10 +1,12 @@
 """
-Interact with Google Drive
+Functions for interact with Google Drive
 
 """
+from pathlib import Path
 import pickle
 import os.path
 from googleapiclient.discovery import build
+from googleapiclient.http import MediaFileUpload
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
@@ -16,17 +18,22 @@ def drive_service():
 
     return g_drive_service
 
-def main():
 
-    results = drive_service().files().list(
-        pageSize=10, fields="nextPageToken, files(id, name)").execute()
-    items = results.get('files', [])
-
-    if not items:
-        print('No files found.')
+def upload_csv_to_drive(csv_path, csv_name, folder_id=None):
+    if folder_id:
+        csv_metadata = {'name': csv_name,
+                        'parents': [folder_id]}
     else:
-        print('Files:')
-        for item in items:
-            print(u'{0} ({1})'.format(item['name'], item['id']))
+        csv_metadata = {'name': csv_name}
+
+    media = MediaFileUpload(csv_path,
+                            mimetype='text/csv',
+                            resumable=True)
+    file = drive_service().files().create(body=csv_metadata,
+                                          media_body=media,
+                                          fields='id').execute()
+
+    return file.get('id')
+
 
 
