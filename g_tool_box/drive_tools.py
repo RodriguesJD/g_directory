@@ -2,15 +2,19 @@
 Interact with Google Drive
 
 """
-from g_tool_box.g_tools import drive_service
 import pickle
 import os.path
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
-# If modifying these scopes, delete the file token.pickle.
+from g_tool_box.google_credentials import google_creds
 
+
+def drive_service():
+    g_drive_service = build('drive', 'v3', credentials=google_creds())
+
+    return g_drive_service
 
 def main():
 

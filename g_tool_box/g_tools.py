@@ -11,12 +11,6 @@ def directory_service() -> object:
     return dir_service
 
 
-def drive_service():
-    g_drive_service = build('drive', 'v3', credentials=google_creds())
-
-    return g_drive_service
-
-
 def get_all_users() -> list:
     """
     Get all data on all users and return it as a list of dictionaries.
