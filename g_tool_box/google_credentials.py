@@ -17,7 +17,8 @@ def google_creds():
     """
        This function handles auth and service for google's access to admin sdk directory api.
 
-       :return service: Rest API service object
+       Returns:
+
        """
     # If modifying these scopes, delete the file token.pickle.
     SCOPES = ['https://www.googleapis.com/auth/admin.directory.user',
