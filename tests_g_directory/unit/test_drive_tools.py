@@ -45,12 +45,19 @@ def test_find_folder_by_name():
     assert folder_type == 'application/vnd.google-apps.folder'
 
 
+def test_find_file_by_name():
+    file_name = "Don't delete me i use this for testing"
+    find_file = drive_tools.find_file_by_name(file_name)
+    assert isinstance(find_file, dict)
+
+
 def test_upload_csv_to_drive():
     path_to_upload_csv = "tests_g_directory/func/test_upload_files"
     csv_file_name = "csv_move_to_drive_test.csv"
     file_id = drive_tools.upload_csv_to_drive(csv_path=path_to_upload_csv, csv_name=csv_file_name)
     assert isinstance(file_id, str)
 
+    # Find file to confirm it was created.
     find_file = drive_tools.find_file_by_name(csv_file_name)
     assert isinstance(find_file, dict)
 
