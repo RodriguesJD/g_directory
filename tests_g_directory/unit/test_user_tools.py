@@ -2,6 +2,8 @@ from g_tool_box import user_tools
 
 
 def test_is_fte():
+    # TODO move this function to a lime project.
+
     fte_user = "dijana.antic@li.me"
     fte_ou = "/Lime IT"
 

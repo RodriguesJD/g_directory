@@ -6,10 +6,12 @@ from pathlib import Path
 from typing import Optional
 import pickle
 import os.path
+from pprint import pprint
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+from apiclient import errors
 
 from g_tool_box.google_credentials import google_creds
 
@@ -19,16 +21,15 @@ def drive_service() -> object:
     This function negotiates access to Google Drive.
 
     Returns:
-        object: Rest API service object for Google Drive.
+        object: Drive API service instance.
 
     """
     g_drive_service = build('drive', 'v3', credentials=google_creds())
 
     return g_drive_service
 
-# TODO create docsting
-#  TODO typehinting for the funcs below
-# TODO create testing for create add delete for functional testing
+
+
 
 
 def upload_csv_to_drive(csv_path: str, csv_name: str, folder_id: Optional[str] = None) -> str:
@@ -87,5 +88,27 @@ def create_folder_in_drive(folder_name: str, folder_id: Optional[str] = None) ->
                                             fields='id').execute()
 
     return folder.get('id')
+
+
+def delete_file(file_id: str) -> bool:
+    # TODO also test that this can delete a folder
+    # TODO this is untested test it.
+    """Permanently delete a file, skipping the trash.
+
+    Args:
+        file_id: ID of the file to delete.
+    Returns:
+        bool: If the file is deleted then it returns True. If its not deleted then it returns False.
+
+    """
+
+    try:
+        drive_service().files().delete(fileId=file_id).execute()
+        file_deleted_status = True
+
+    except errors.HttpError:
+        file_deleted_status = False
+
+    return file_deleted_status
 
 
