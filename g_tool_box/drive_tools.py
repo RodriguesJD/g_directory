@@ -117,7 +117,8 @@ def upload_csv_to_drive(csv_path: str, csv_name: str, folder_id: Optional[str] =
     else:
         csv_metadata = {'name': csv_name}
 
-    media = MediaFileUpload(csv_path,
+    csv_file = Path(f"{csv_path}/{csv_name}")
+    media = MediaFileUpload(csv_file,
                             mimetype='text/csv')
     file = drive_service().files().create(body=csv_metadata,
                                           media_body=media,
