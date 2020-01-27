@@ -155,10 +155,10 @@ def create_folder_in_drive(folder_name: str, folder_id: Optional[str] = None) ->
     return folder.get('id')
 
 
-def delete_file(file_id: str) -> bool:
-    # TODO also test that this can delete a folder
+def delete_file_or_folder(file_id: str) -> bool:
     # TODO this is untested test it.
-    """Permanently delete a file, skipping the trash.
+    """
+    Permanently delete a file, skipping the trash.
 
     Args:
         file_id: ID of the file to delete.

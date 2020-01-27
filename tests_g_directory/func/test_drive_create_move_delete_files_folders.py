@@ -1,4 +1,5 @@
 from g_tool_box import drive_tools
+from pathlib import Path
 
 
 def test_drive_create_upload_delete():
@@ -7,8 +8,13 @@ def test_drive_create_upload_delete():
 
     tmp_base_folder = "delete_this_root_folder"
 
-    # Confirm folder does not exist.
+    # Confirm folder does not exist, if it does then delete it.
     find_folder = drive_tools.find_folder_by_name(tmp_base_folder)  # Find a folder that the Oauth user has access to.
+    if find_folder:
+        file_deleted = drive_tools.delete_file_or_folder(find_folder['id'])
+        assert file_deleted
+        find_folder = drive_tools.find_folder_by_name(tmp_base_folder)
+
     assert not find_folder
 
     # create base folder for test
@@ -20,7 +26,7 @@ def test_drive_create_upload_delete():
     assert isinstance(find_folder, dict)
 
     # Delete folder and empty trash
-    file_deleted = drive_tools.delete_file(tmp_drive_folder)
+    file_deleted = drive_tools.delete_file_or_folder(tmp_drive_folder)
     assert file_deleted
     drive_tools.empty_trash()
 
