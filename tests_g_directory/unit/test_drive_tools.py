@@ -51,7 +51,8 @@ def test_upload_csv_to_drive():
     file_id = drive_tools.upload_csv_to_drive(csv_path=path_to_upload_csv, csv_name=csv_file_name)
     assert isinstance(file_id, str)
 
-    # TODO find file to confirm it was made.
+    find_file = drive_tools.find_file_by_name(csv_file_name)
+    assert isinstance(find_file, dict)
 
     # delete file from G drive after testing it.
     delete_status = drive_tools.delete_file_or_folder(file_id)
