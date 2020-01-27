@@ -62,6 +62,41 @@ def list_folders() -> list:
     return my_folders
 
 
+def find_folder_by_name(folder_name) -> list:
+    """
+    Creates a list of all the folders that api Oauth user has access to.
+
+    Returns:
+        list: List of folders. Each folder returns a dict of data.
+
+    """
+    page_token = None
+    getting_files = True
+    folder_data = False
+
+    while getting_files:
+        if not page_token:
+            response = drive_service().files().list(q="mimeType = 'application/vnd.google-apps.folder'",
+                                                    spaces='drive').execute()
+        else:
+            response = drive_service().files().list(q="mimeType = 'application/vnd.google-apps.folder'", spaces='drive',
+                                                    pageToken=page_token).execute()
+
+        key_list = list(response.keys())
+        if "nextPageToken" not in key_list:
+            getting_files = False
+        else:
+            page_token = response["nextPageToken"]
+
+        folders = response['files']  # Drive api refers to files and folders as files.
+        for folder in folders:
+            if folder_name == folder["name"]:
+                folder_data = folder
+                getting_files = False
+
+    return folder_data
+
+
 def upload_csv_to_drive(csv_path: str, csv_name: str, folder_id: Optional[str] = None) -> str:
     """
     Upload csv files to Google Drive. If no folder_id is passed to the function then it will upload the csv
