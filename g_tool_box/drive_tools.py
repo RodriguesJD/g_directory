@@ -142,3 +142,17 @@ def delete_file(file_id: str) -> bool:
     return file_deleted_status
 
 
+def empty_trash():
+    """
+    This will empty the Oauth user's trash bin.
+
+    Returns:
+        True: I have no way of testing this that i can think of so im just returning true. HACKY i know.
+    """
+    drive_service().files().emptyTrash().execute()
+
+    return True
+
+
+
+
