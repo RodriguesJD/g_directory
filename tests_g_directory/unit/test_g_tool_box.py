@@ -14,7 +14,6 @@ def test_get_all_users():
     assert isinstance(all_users, list)
     for user in all_users:
         assert isinstance(user, dict)
-        # TODO test the content of the dict
 
 
 def test_find_user():
@@ -27,7 +26,6 @@ def test_get_all_groups():
     assert isinstance(all_groups, list)
     for group in all_groups:
         assert isinstance(group, dict)
-        # TODO test the content of the dict
 
 
 def test_find_group():
@@ -40,4 +38,3 @@ def test_get_all_orgunits():
     assert isinstance(all_org_units, list)
     for org_unit in all_org_units:
         assert isinstance(org_unit, dict)
-        # TODO test the content of the dict
