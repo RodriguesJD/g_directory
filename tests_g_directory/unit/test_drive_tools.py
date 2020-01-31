@@ -52,7 +52,23 @@ def test_find_file_by_name():
 
 
 def test_upload_csv_to_drive():
-    path_to_upload_csv = "tests_g_directory/func/test_upload_files"
+    """
+        THIS IS A BIT HACKY. Sorry about that.
+
+        HERE IS THE REASON FOR THE IF STATEMENT BELOW THIS COMMENT.
+
+        When i test g_directory as a submodule it cant see the path to "tests_g_directory/func/test_upload_files".
+        The reason is the working directory is off by a folder when running as a submodule. So the logic
+        here is, if PYTHONPATH can see the "g_directory/" then im assuming that its being tested as a submodule.
+        So i pass "g_directory/tests_g_directory/func/test_upload_files" as the "path_to_upload_csv" file path.
+
+
+        """
+    if not os.path.isdir("g_directory/"):
+        path_to_upload_csv = "tests_g_directory/func/test_upload_files"
+    else:
+        path_to_upload_csv = "g_directory/tests_g_directory/func/test_upload_files"
+
     csv_file_name = "csv_move_to_drive_test.csv"
     file_id = drive_tools.upload_csv_to_drive(csv_path=path_to_upload_csv, csv_name=csv_file_name)
     assert isinstance(file_id, str)
