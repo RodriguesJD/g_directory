@@ -1,5 +1,6 @@
 from g_tool_box import drive_tools
 from pathlib import Path
+import os
 
 
 def test_drive_create_upload_delete():
@@ -30,8 +31,24 @@ def test_drive_create_upload_delete():
     find_folder = drive_tools.find_folder_by_name(tmp_base_folder)
     assert isinstance(find_folder, dict)
 
+    """
+    THIS IS A BIT HACKY. Sorry about that.
+    
+    HERE IS THE REASON FOR THE IF STATEMENT BELOW THIS COMMENT.
+    
+    When i test g_directory as a submodule it cant see the path to "tests_g_directory/func/test_upload_files".
+    The reason is the working directory is off by a folder when running as a submodule. So the logic
+    here is, if PYTHONPATH can see the "g_directory/" then im assuming that its being tested as a submodule.
+    So i pass "g_directory/tests_g_directory/func/test_upload_files" as the "path_to_upload_csv" file path.
+    
+    
+    """
+    if not os.path.isdir("g_directory/"):
+        path_to_upload_csv = "tests_g_directory/func/test_upload_files"
+    else:
+        path_to_upload_csv = "g_directory/tests_g_directory/func/test_upload_files"
+
     # Upload csv file to folder_id in g drive.
-    path_to_upload_csv = "tests_g_directory/func/test_upload_files"
     csv_file_name = "csv_move_to_drive_test.csv"
     upload_file = drive_tools.upload_csv_to_drive(csv_path=path_to_upload_csv,
                                                   csv_name=csv_file_name,
