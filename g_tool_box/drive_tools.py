@@ -192,7 +192,6 @@ def create_folder_in_drive(folder_name: str, folder_id: Optional[str] = None) ->
 
 
 def delete_file_or_folder(file_id: str) -> bool:
-    # TODO this is untested test it.
     """
     Permanently delete a file, skipping the trash.
 
