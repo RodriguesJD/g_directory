@@ -6,6 +6,13 @@ from g_tool_box.google_credentials import google_creds
 
 
 def directory_service() -> object:
+    """
+    This function negotiates access to Google Directory API.
+
+    Returns:
+        object: Directory API service instance.
+
+    """
     dir_service = build('admin', 'directory_v1', credentials=google_creds())
 
     return dir_service
