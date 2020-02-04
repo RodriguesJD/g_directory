@@ -22,7 +22,8 @@ def get_all_users() -> list:
     """
     Get all data on all users and return it as a list of dictionaries.
 
-    :return all_user_data: List of dictionaries of all users data.
+    Returns:
+         list: List of dictionaries of all users data.
     """
     all_user_data = []
     results = directory_service().users().list(customer='my_customer', orderBy='email', projection="full").execute()
