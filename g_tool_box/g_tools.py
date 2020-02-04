@@ -86,7 +86,8 @@ def get_all_groups() -> list:
     """
     Get all data on all groups and return it as a list of dictionaries.
 
-    :return all_group_data: List of dictionaries of all group data.
+    Return:
+         list: List of dictionaries of all group data.
     """
     all_group_data = []
     results = directory_service().groups().list(customer='my_customer').execute()
