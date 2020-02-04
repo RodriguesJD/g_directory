@@ -3,7 +3,7 @@ Functions for interact with Google Drive
 
 """
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Union
 import pickle
 import os.path
 from pprint import pprint
@@ -46,7 +46,8 @@ def list_folders() -> list:
             response = drive_service().files().list(q="mimeType = 'application/vnd.google-apps.folder'",
                                                     spaces='drive').execute()
         else:
-            response = drive_service().files().list(q="mimeType = 'application/vnd.google-apps.folder'", spaces='drive',
+            response = drive_service().files().list(q="mimeType = 'application/vnd.google-apps.folder'",
+                                                    spaces='drive',
                                                     pageToken=page_token).execute()
 
         key_list = list(response.keys())
@@ -62,13 +63,17 @@ def list_folders() -> list:
     return my_folders
 
 
-def find_folder_by_name(folder_name) -> list:
+def find_folder_by_name(folder_name: str) -> Union[bool, dict]:
     """
-    Creates a list of all the folders that api Oauth user has access to.
+    Search through all the folders that the Oauth user has access to. If the folder_name is found it returns a dict of 
+    data about the folder.
+
+    Args:
+        folder_name: Name of the Google Drive folder.
 
     Returns:
-        list: List of folders. Each folder returns a dict of data.
-
+        bool, dict: If folder_name is found it returns a dict. If the folder name is not found it returns False.
+        
     """
     page_token = None
     getting_files = True
