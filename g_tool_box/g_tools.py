@@ -53,9 +53,11 @@ def get_all_users() -> list:
 def find_user(primary_user_email: str) -> dict:
     """
     Search for user by primary email.
+    Args:
+        primary_user_email: Users primary email address.
 
-    :param primary_user_email: Users primary email address.
-    :return user_data: Users data in a dictionary.
+    Returns:
+        dict: Users data.
     """
     user_data = directory_service().users().get(userKey=primary_user_email, projection="full").execute()
     if primary_user_email.lower() != user_data['primaryEmail'].lower():
