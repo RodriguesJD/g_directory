@@ -102,12 +102,16 @@ def find_folder_by_name(folder_name: str) -> Union[bool, dict]:
     return folder_data
 
 
-def find_file_by_name(file_name) -> list:
+def find_file_by_name(file_name: str) -> Union[bool, dict]:
     """
-    Creates a list of all the files that the api Oauth user has access to.
+    Search through all the files that the Oauth user has access to. If the file_name is found it returns a dict of
+    data about the file.
+
+    Args:
+        file_name: Name of the Google Drive file.
 
     Returns:
-        list: If file is found return the data. Else it returns false
+        bool, dict: If filde_name is found it returns a dict. If the filde name is not found it returns False.
 
     """
     page_token = None
