@@ -66,7 +66,18 @@ def find_user(primary_user_email: str) -> dict:
     return user_data
 
 
-def update_user(primary_user_email: str, user_dict: dict):
+def update_user(primary_user_email: str, user_dict: dict) -> dict:
+    """
+    Update or add data to an existing user.
+
+    Args:
+        primary_user_email: User's email.
+        user_dict: New data that will update or add to existing data.
+
+    Returns:
+        dict: Response from Google's server.
+    """
+    # TODO create test for this func
     google_response = directory_service().users().update(userKey=primary_user_email, body=user_dict).execute()
     return google_response
 
