@@ -84,43 +84,47 @@ def test_upload_csv_to_drive():
 
 def test_create_folder_in_drive():
     # Create a folder name for testing
-    test_folder_name = "test_create_folder_in_drive"
+    test_create_folder = "test_create_folder"
 
-    # If test_folder_name exists then delete it before the test.
-    find_test_folder_name = drive_tools.find_folder_by_name(test_folder_name)
+    # If test_create_folder exists then delete it before the test.
+    find_test_folder_name = drive_tools.find_folder_by_name(test_create_folder)
+    # TODO this logic should live in the delete function itself
+    # TODO create a pull request for adding this logic to the delete function
     if find_test_folder_name:
         file_found = True
         while file_found:
-            find_test_folder_name = drive_tools.find_folder_by_name(test_folder_name)
+            find_test_folder_name = drive_tools.find_folder_by_name(test_create_folder)
             if find_test_folder_name:
                 drive_tools.delete_file_or_folder(find_test_folder_name['id'])
             else:
                 file_found = False
 
-    # Confirm test_folder_name does NOT exist.
-    find_test_folder_name = drive_tools.find_folder_by_name(test_folder_name)
+    # Confirm test_create_folder does NOT exist.
+    find_test_folder_name = drive_tools.find_folder_by_name(test_create_folder)
     assert not find_test_folder_name
 
-    # Create test_folder_name in g drive.
-    creating_in_root = drive_tools.create_folder_in_drive(test_folder_name)
+    # Create test_create_folder in g drive.
+    creating_in_root = drive_tools.create_folder_in_drive(test_create_folder)
     assert isinstance(creating_in_root, str)
 
-    # Confirm test_folder_name DOES exist.
-    find_test_folder_name = drive_tools.find_folder_by_name(test_folder_name)
+    # Confirm test_create_folder DOES exist.
+    find_test_folder_name = drive_tools.find_folder_by_name(test_create_folder)
     assert find_test_folder_name
 
     # Clean up test env.
     drive_tools.find_folder_by_name(creating_in_root)
 
-    # Confirm test_folder_name was removed.
-    find_test_folder_name = drive_tools.find_folder_by_name(test_folder_name)
+    # Confirm test_create_folder was removed.
+    find_test_folder_name = drive_tools.find_folder_by_name(test_create_folder)
     if find_test_folder_name:
         file_found = True
         while file_found:
-            find_test_folder_name = drive_tools.find_folder_by_name(test_folder_name)
+            find_test_folder_name = drive_tools.find_folder_by_name(test_create_folder)
             if find_test_folder_name:
                 drive_tools.delete_file_or_folder(find_test_folder_name['id'])
             else:
                 file_found = False
 
     assert not find_test_folder_name
+
+

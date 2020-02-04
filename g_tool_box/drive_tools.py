@@ -210,7 +210,7 @@ def delete_file_or_folder(file_id: str) -> bool:
         bool: If the file is deleted then it returns True. If its not deleted then it returns False.
 
     """
-
+    # TODO Create unit test for this delete_file_or_folder
     try:
         drive_service().files().delete(fileId=file_id).execute()
         file_deleted_status = True
