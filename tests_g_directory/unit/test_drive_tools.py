@@ -80,3 +80,7 @@ def test_upload_csv_to_drive():
     # delete file from G drive after testing it.
     delete_status = drive_tools.delete_file_or_folder(file_id)
     assert delete_status
+
+
+def test_create_folder_in_drive():
+    pass

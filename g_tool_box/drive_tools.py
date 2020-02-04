@@ -173,12 +173,12 @@ def upload_csv_to_drive(csv_path: str, csv_name: str, folder_id: Optional[str] =
 
 def create_folder_in_drive(folder_name: str, folder_id: Optional[str] = None) -> str:
     """
-    This creates a folder in Google Drive. If no folder_id is passed to the function then it will create the
-    folder in the root of the G Drive.
+    This creates a folder in Google Drive. If no folder_id is passed to the function then folder will be created in the
+    root of the G Drive.
 
     Args:
         folder_name (str): Name of the folder that is going to be created.
-        folder_id (str): Google drive's folder id you with to create the new folder in.
+        folder_id (str): Google drive's folder id you will use to create the new folder in.
     Returns:
         str: Returns the google drive folder id of the newly created g drive folder.
 
