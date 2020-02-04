@@ -130,7 +130,8 @@ def get_all_orgunits() -> list:
     """
     Get all data on all org_units and return it as a list of dictionaries.
 
-    :return all_orgunits_data: List of dictionaries of all org_unit data.
+    Returns:
+        list: List of dictionaries of all org_unit data.
     """
     all_orgunits_data = []
     results = directory_service().orgunits().list(customerId='my_customer').execute()
