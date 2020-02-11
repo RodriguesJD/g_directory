@@ -26,7 +26,8 @@ def google_creds():
               'https://www.googleapis.com/auth/admin.directory.orgunit',
               'https://www.googleapis.com/auth/drive.file',
               'https://www.googleapis.com/auth/drive',
-              'https://www.googleapis.com/auth/drive.activity'
+              'https://www.googleapis.com/auth/drive.activity',
+              'https://www.googleapis.com/auth/spreadsheets'
               ]
 
     creds = None
