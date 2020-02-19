@@ -126,6 +126,42 @@ def find_group(group_email: str) -> dict:
     return group_data
 
 
+def create_group(group_name: str, group_email: str) -> dict:
+    """
+    Create group in Google.
+    Args:
+        group_name (str): The name of the group.
+        group_email (str): The email used for emailing all memebers of the group.
+
+    Returns (dict): Dictionary that google returns after making the group.
+
+    """
+    body = {
+        "kind": "admin#directory#group",
+        "name": group_name,
+        "adminCreated": True,
+        "email": group_email
+    }
+    created_group_data = directory_service().groups().insert(body=body).execute()
+
+    return created_group_data
+
+
+def update_group(group_email, user_email):
+    body = {
+        "status": "ACTIVE",
+        "kind": "admin#directory#member",
+        "delivery_settings": "ALL_MAIL",
+        "role": "MEMBER",
+        "type": "EXTERNAL",
+        "email": user_email
+        }
+
+    member_added_to_group = directory_service().members().insert(groupKey=group_email,body=body).execute()
+
+    return member_added_to_group
+
+
 def get_all_orgunits() -> list:
     """
     Get all data on all org_units and return it as a list of dictionaries.
