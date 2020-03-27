@@ -1,6 +1,9 @@
-from g_tool_box import drive_tools
 from pathlib import Path
 import os
+try:
+    from g_tool_box import drive_tools
+except ModuleNotFoundError:
+    from g_directory.g_tool_box import drive_tools
 
 
 def test_drive_create_upload_delete():

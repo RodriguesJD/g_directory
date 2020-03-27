@@ -13,7 +13,10 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from apiclient import errors
 
-from g_tool_box.google_credentials import google_creds
+try:
+    from g_tool_box.google_credentials import google_creds
+except ModuleNotFoundError:
+    from g_directory.g_tool_box.google_credentials import google_creds
 
 
 def drive_service() -> object:

@@ -1,7 +1,9 @@
 import os
 from pathlib import Path
-from g_tool_box import drive_tools
-
+try:
+    from g_tool_box import drive_tools
+except ModuleNotFoundError:
+    from g_directory.g_tool_box import drive_tools
 
 def test_dir_service():
     assert str(type(drive_tools.drive_service())) == "<class 'googleapiclient.discovery.Resource'>"

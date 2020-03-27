@@ -1,4 +1,7 @@
-from g_tool_box import sheet_tools
+try:
+    from g_tool_box import sheet_tools
+except ModuleNotFoundError:
+    from g_directory.g_tool_box import sheet_tools
 
 
 def test_dir_service():

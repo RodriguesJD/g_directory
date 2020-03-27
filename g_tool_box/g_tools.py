@@ -1,8 +1,10 @@
 from googleapiclient.discovery import build
 from pprint import pprint
 
-
-from g_tool_box.google_credentials import google_creds
+try:
+    from g_tool_box.google_credentials import google_creds
+except ModuleNotFoundError:
+    from g_directory.g_tool_box.google_credentials import google_creds
 
 
 def directory_service() -> object:

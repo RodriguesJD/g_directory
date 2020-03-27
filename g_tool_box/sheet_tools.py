@@ -1,5 +1,9 @@
-from g_tool_box.google_credentials import google_creds
 from googleapiclient.discovery import build
+
+try:
+    from g_tool_box.google_credentials import google_creds
+except ModuleNotFoundError:
+    from g_directory.google_credentials import google_creds
 
 
 def sheets_service() -> object:
