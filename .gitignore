@@ -5,6 +5,5 @@ credentials.json
 *__pycache__*
 token.pickle
 playground.py
-tests_g_directory/func/test_upload_files/csv_move_to_drive_test.csv
 
 
