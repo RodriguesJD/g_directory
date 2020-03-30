@@ -203,6 +203,36 @@ def create_folder_in_drive(folder_name: str, folder_id: Optional[str] = None) ->
     return folder.get('id')
 
 
+def create_file_in_drive(file_name: str, folder_id: Optional[str] = None) -> str:
+    """
+    This creates a file in Google Drive. If no folder_id is passed to the function then file will be created in the
+    root of the G Drive.
+
+    Args:
+        file_name (str): Name of the file that is going to be created.
+        folder_id (str): The Google drive's folder id you will use to create the new folder in.
+    Returns:
+        str: Returns the google drive file id of the newly created g drive file.
+
+    """
+    if folder_id:
+        file_metadata = {
+            'name': file_name,
+            'mimeType': 'application/vnd.google-apps.spreadsheet',
+            'parents': [folder_id]
+        }
+    else:
+        file_metadata = {
+            'name': file_name,
+            'mimeType': 'application/vnd.google-apps.spreadsheet'
+        }
+    folder = drive_service().files().create(body=file_metadata,
+                                            fields='id').execute()
+
+
+    return folder.get('id')
+
+
 def delete_file_or_folder(file_id: str) -> bool:
     """
     Permanently delete a file, skipping the trash.

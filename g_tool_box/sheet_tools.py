@@ -42,3 +42,14 @@ def create_sheets(title, values):
     return spreadsheet_id
 
 
+def write_to_existing_sheet(sheet_id, values):
+    body = {
+        'values': values
+    }
+    result = sheets_service().spreadsheets().values().update(spreadsheetId=sheet_id,
+                                                             range="A1",
+                                                             valueInputOption="USER_ENTERED",
+                                                             body=body).execute()
+
+    return result
+
