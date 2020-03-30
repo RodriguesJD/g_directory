@@ -131,3 +131,46 @@ def test_create_folder_in_drive():
     assert not find_test_folder_name
 
 
+def test_create_file_in_drive():
+    # Create a file name for testing
+    test_create_file = "test_create_file"
+
+    # If test_create_file exists then delete it before the test.
+    find_test_file_name = drive_tools.find_file_by_name(test_create_file)
+
+    if find_test_file_name:
+        file_found = True
+        while file_found:
+            find_test_file_name = drive_tools.find_file_by_name(test_create_file)
+            if find_test_file_name:
+                drive_tools.delete_file_or_folder(find_test_file_name['id'])
+            else:
+                file_found = False
+
+    # Confirm test_create_folder does NOT exist.
+    find_test_file_name = drive_tools.find_file_by_name(test_create_file)
+    assert not find_test_file_name
+
+    # Create test_create_file in g drive.
+    creating_in_root = drive_tools.create_file_in_drive(test_create_file)
+    assert isinstance(creating_in_root, str)
+
+    # Confirm test_create_file DOES exist.
+    find_test_file_name = drive_tools.find_file_by_name(test_create_file)
+    assert find_test_file_name
+
+    # Clean up test env.
+    drive_tools.find_file_by_name(creating_in_root)
+
+    # Confirm test_create_file was removed.
+    find_test_file_name = drive_tools.find_file_by_name(test_create_file)
+    if find_test_file_name:
+        file_found = True
+        while file_found:
+            find_test_file_name = drive_tools.find_file_by_name(test_create_file)
+            if find_test_file_name:
+                drive_tools.delete_file_or_folder(find_test_file_name['id'])
+            else:
+                file_found = False
+
+    assert not find_test_file_name
