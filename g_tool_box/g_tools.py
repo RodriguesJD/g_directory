@@ -128,6 +128,20 @@ def find_group(group_email: str) -> dict:
     return group_data
 
 
+def find_group_members(group_email: str) -> dict:
+    """
+        Search for member of group by group email.
+
+        Args:
+            group_email: Group email address.
+        Returns:
+
+            dict: Group member data in a dictionary.
+        """
+    group_data = directory_service().members().list(groupKey=group_email).execute()
+    return group_data
+
+
 def create_group(group_name: str, group_email: str) -> dict:
     """
     Create group in Google.

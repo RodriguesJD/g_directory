@@ -36,6 +36,13 @@ def test_find_group():
     assert isinstance(group, dict)
 
 
+def test_find_group_members():
+    group_email = os.environ["WORK_GROUP_EMAIL"]
+    group_member_dict = g_tools.find_group_members(group_email)
+    assert isinstance(group_member_dict, dict)
+    assert isinstance(group_member_dict["members"], list)
+
+
 def test_get_all_orgunits():
     all_org_units = g_tools.get_all_orgunits()
     assert isinstance(all_org_units, list)
