@@ -10,8 +10,8 @@ def test_dir_service():
     assert str(type(drive_tools.drive_service())) == "<class 'googleapiclient.discovery.Resource'>"
 
 
-def test_list_folders():
-    list_of_folders = drive_tools.list_folders()
+def test_list_my_folders():
+    list_of_folders = drive_tools.list_my_folders()
     assert isinstance(list_of_folders, list)
 
     for folder in list_of_folders:
@@ -28,6 +28,27 @@ def test_list_folders():
 
         folder_type = folder['mimeType']
         assert folder_type == 'application/vnd.google-apps.folder'
+
+
+def test_list_domain_folders():
+    list_domain_folders = drive_tools.list_domain_folders()
+    assert isinstance(list_domain_folders, list)
+
+    for folder in list_domain_folders:
+        assert isinstance(folder, dict)
+
+        kind = folder['kind']
+        assert kind == 'drive#file'
+
+        folder_id = folder['id']
+        assert isinstance(folder_id, str)
+
+        folder_name = folder['name']
+        assert isinstance(folder_name, str)
+
+        folder_type = folder['mimeType']
+        assert folder_type == 'application/vnd.google-apps.folder'
+
 
 
 def test_find_folder_by_name():
