@@ -269,6 +269,7 @@ def create_file_in_drive(file_name: str, folder_id: Optional[str] = None) -> str
     return folder.get('id')
 
 
+
 def delete_file_or_folder(file_id: str) -> bool:
     """
     Permanently delete a file, skipping the trash.
@@ -300,7 +301,5 @@ def empty_trash():
     drive_service().files().emptyTrash().execute()
 
     return True
-
-
 
 
