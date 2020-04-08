@@ -24,6 +24,10 @@ def test_find_user():
     assert isinstance(user, dict)
 
 
+def test_update_user():
+    pass
+
+
 def test_get_all_groups():
     all_groups = g_tools.get_all_groups()
     assert isinstance(all_groups, list)

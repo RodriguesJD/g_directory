@@ -108,7 +108,7 @@ def test_upload_csv_to_drive():
 
 def test_create_folder_in_drive():
     # Create a folder name for testing
-    test_create_folder = "test_create_folder"
+    test_create_folder = "test_create_folder_del_me"
 
     # If test_create_folder exists then delete it before the test.
     find_test_folder_name = drive_tools.find_folder_by_name(test_create_folder)
