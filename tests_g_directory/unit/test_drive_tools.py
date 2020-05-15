@@ -50,7 +50,6 @@ def test_list_domain_folders():
         assert folder_type == 'application/vnd.google-apps.folder'
 
 
-
 def test_find_folder_by_name():
     file_that_exists = os.environ["G_DRIVE_TEST_FOLDER"]
     folder = drive_tools.find_folder_by_name(file_that_exists)
@@ -195,3 +194,47 @@ def test_create_file_in_drive():
                 file_found = False
 
     assert not find_test_file_name
+
+
+def test_delete_file_or_folder():
+    file_name_to_delete = "del_this_file"
+    folder_name_to_delete = "def_this_folder_name"
+
+    # Create file
+    file_id = drive_tools.create_file_in_drive(file_name_to_delete)
+    # Confirm the file exists and get the file id
+    found_file = drive_tools.find_file_by_name(file_name_to_delete)
+    assert found_file
+    # Delete file
+    drive_tools.delete_file_or_folder(file_id)
+
+    file_found = True
+    while file_found:
+        find_file = drive_tools.find_file_by_name(file_name_to_delete)
+        if not find_file:
+            file_found = False
+
+    # Confirm you cant find the file after deleting it.
+    assert not drive_tools.find_file_by_name(file_name_to_delete)
+
+    # Create folder
+    drive_tools.create_folder_in_drive(folder_name_to_delete)
+    # Confirm the file exists and get the file id
+    folder_id = drive_tools.find_folder_by_name(folder_name_to_delete)
+    assert folder_id
+    # Delete file
+    drive_tools.delete_file_or_folder(folder_id)
+    folder_found = True
+    while folder_found:
+        find_folder = drive_tools.find_folder_by_name(folder_name_to_delete)
+        if not find_folder:
+            folder_found = False
+
+    # Confirm you cant find the file after deleting it.
+    assert not drive_tools.find_folder_by_name(folder_name_to_delete)
+
+
+
+
+
+

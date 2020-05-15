@@ -142,6 +142,11 @@ def find_group_members(group_email: str) -> dict:
     return group_data
 
 
+def get_alias_with_email(primary_user_email):
+    alias_info = directory_service().users().aliases().list(userKey=primary_user_email).execute()
+    return alias_info
+
+
 def create_group(group_name: str, group_email: str) -> dict:
     """
     Create group in Google.
